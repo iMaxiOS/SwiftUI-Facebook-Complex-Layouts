@@ -50,25 +50,27 @@ struct ContentView : View {
     
     var body: some View {
         NavigationView {
-            List {
-                ScrollView {
-                    VStack (alignment: .leading) {
-                        Text("Trending")
-                        .font(.subheadline)
-                        HStack {
-                            GroupeView()
-                            GroupeView()
-                            GroupeView()
-                            GroupeView()
-                            GroupeView()
-                            GroupeView()
-                        }.padding(.top, -20)
+            VStack (alignment: .leading) {
+                List {
+                    ScrollView {
+                        VStack (alignment: .leading) {
+                            Text("Trending")
+                                .font(.subheadline)
+                            HStack {
+                                GroupeView()
+                                GroupeView()
+                                GroupeView()
+                                GroupeView()
+                                GroupeView()
+                                GroupeView()
+                                }.padding(.top, -20)
+                        }
+                        }.frame(height: 170)
+                    ForEach(posts.identified(by: \.id)) { post in
+                        PostView(post: post)
                     }
-                    }.frame(height: 170)
-                ForEach(posts.identified(by: \.id)) { post in
-                    PostView(post: post)
-                }
-                }.navigationBarTitle(Text("Group"))
+                    }.navigationBarTitle(Text("Group"))
+            }
         }
     }
 }
@@ -79,6 +81,7 @@ struct GroupeView: View {
             Image("trees")
                 .resizable()
                 .clipped()
+                .cornerRadius(8)
                 .frame(width: 90, height: 90)
             Text("Ko-Ed Hikes of Ukraine")
                 .padding(.leading, 0)
